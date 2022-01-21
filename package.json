@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon ./index.js",
+    "wb-update": "webdriver-manager update",
+    "wb-start": "webdriver-manager start",
+    "wb-status": "webdriver-manager status",
+    "wb-clean": "webdriver-manager clean",
+    "wb-shutdown": "webdriver-manager shutdown"
   },
   "repository": {
     "type": "git",
@@ -16,5 +21,28 @@
   "bugs": {
     "url": "https://github.com/Giranda22-Git/autoRegAccounts/issues"
   },
-  "homepage": "https://github.com/Giranda22-Git/autoRegAccounts#readme"
+  "homepage": "https://github.com/Giranda22-Git/autoRegAccounts#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "emailjs-imap-client-2": "^3.1.1",
+    "express": "^4.17.2",
+    "header-generator": "^1.1.3",
+    "imap": "^0.8.19",
+    "mailparser": "^3.4.0",
+    "mongoose": "^6.1.2",
+    "proxy-chain": "^1.0.4",
+    "selenium-stealth-fixed": "^1.0.3",
+    "selenium-webdriver": "^4.0.0-alpha.8",
+    "sharp": "^0.29.3",
+    "uid": "^2.0.0",
+    "unique-names-generator": "^4.6.0",
+    "webdriver-manager": "^12.1.8"
+  },
+  "devDependencies": {
+    "chromedriver": "^96.0.0",
+    "jest": "^27.4.5",
+    "nodemon": "^2.0.15"
+  }
 }
