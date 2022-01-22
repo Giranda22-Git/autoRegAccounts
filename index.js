@@ -53,12 +53,12 @@ async function init (settings) {
     app.use('/proxy', require('./endPoints/proxy.js'))
 
     // create email
-    //const resultOfCreateEmail = await createEmail()
+    const resultOfCreateEmail = await createEmail()
 
     // create instagram
-    const targetEmail = await mongoGetTunedEmails()
+    //const targetEmail = await mongoGetTunedEmails()
 
-    await createInstagram(targetEmail[0], targetEmail.proxy)
+    await createInstagram(resultOfCreateEmail.result, resultOfCreateEmail.proxy)
 
     // const imapConfig = {
     //   id: targetEmail[0]._id,

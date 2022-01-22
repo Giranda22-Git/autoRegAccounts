@@ -3,6 +3,7 @@ const headerGenerator = require('header-generator')
 const {Builder} = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
 const Proxy = require('../lowLevelObjects/Proxy.js')
+const Stealth = require('../lowLevelObjects/Stealth.js')
 
 const createChromeDriver = async function (generateUserAgent, proxy) {
   try {
@@ -18,7 +19,7 @@ const createChromeDriver = async function (generateUserAgent, proxy) {
       '--profile-directory=Default',
       '--disable-extensions',
       '--incognito',
-      `--proxy-server=${proxy.publicProxyUrl}`,
+      //`--proxy-server=${proxy.publicProxyUrl}`,
     ]
 
     if (generateUserAgent) {
@@ -54,19 +55,16 @@ const createChromeDriver = async function (generateUserAgent, proxy) {
       .forBrowser('chrome')
       .build()
 
+
+    const stealthParams = new Stealth()
+
     const seleniumStealth = new SeleniumStealth(driver)
-    await seleniumStealth.stealth({
-      languages: ["en-US", "en"],
-      vendor: "Google Inc.",
-      platform: "Win32",
-      webglVendor: "Intel Inc.",
-      renderer: "Intel Iris OpenGL Engine",
-      fixHairline: true
-    })
+
+    await seleniumStealth.stealth(stealthParams)
 
     //await driver.get('http://whatismyip.host/')
     await driver.get('https://bot.sannysoft.com/')
-    await driver.sleep(50000)
+    await driver.sleep(1000)
 
     return {driver, proxy}
   }
@@ -74,6 +72,13 @@ const createChromeDriver = async function (generateUserAgent, proxy) {
     console.log('createChromeDriver Error: ', err)
   }
 }
+
+// languages: ["en-US", "en"],
+// vendor: "Google Inc.",
+// platform: "Win32",
+// webglVendor: "Intel Inc.",
+// renderer: "Intel Iris OpenGL Engine",
+// fixHairline: true
 
 module.exports = createChromeDriver
 

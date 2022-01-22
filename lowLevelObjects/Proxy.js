@@ -73,7 +73,7 @@ class proxy {
       return this
     }
     catch (err) {
-      console.log('proxy init error: ', error)
+      console.log('proxy init error: ', err)
     }
   }
 
