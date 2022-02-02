@@ -58,7 +58,7 @@ async function init (settings) {
     // create instagram
     //const targetEmail = await mongoGetTunedEmails()
 
-    await createInstagram(resultOfCreateEmail.result, resultOfCreateEmail.proxy)
+    await createInstagram(resultOfCreateEmail.result)
 
     // const imapConfig = {
     //   id: targetEmail[0]._id,

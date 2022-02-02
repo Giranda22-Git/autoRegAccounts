@@ -12,6 +12,10 @@ const proxy = new mongoose.Schema({
   email: {
     type: Array,
     default: []
+  },
+  subject: {
+    type: String,
+    default: ''
   }
 })
 

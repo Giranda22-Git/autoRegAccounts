@@ -9,7 +9,7 @@ const Email = require('../lowLevelObjects/Email.js')
 const createEmail = async function () {
   const generatedEmailData = new Email()
 
-  const chrome = await createChromeDriver(false)
+  const chrome = await createChromeDriver(false, 'mailru')
 
   let driver = chrome.driver
 

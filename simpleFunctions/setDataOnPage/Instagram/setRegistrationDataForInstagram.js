@@ -69,10 +69,15 @@ const setRegistrationDataForInstagram = async function (driver, instagramData) {
     await driver.findElement(By.css('div#react-root > section > main > div > div > div > div > div:nth-of-type(4) > div > div > span > span > select'))
       .sendKeys(monthsRuText[instagramData.dateOfBirth.month])
 
+    try {
     // set dateOfBirth day
     await waitElement(driver, By.css('div#react-root > section > main > div > div > div > div > div:nth-of-type(4) > div > div > span > span:nth-of-type(2) > select'))
     await driver.findElement(By.css('div#react-root > section > main > div > div > div > div > div:nth-of-type(4) > div > div > span > span:nth-of-type(2) > select'))
       .sendKeys(instagramData.dateOfBirth.day)
+    }
+    catch (err) {
+      console.log('month not set')
+    }
 
     // set dateOfBirth year
     await waitElement(driver, By.css('div#react-root > section > main > div > div > div > div > div:nth-of-type(4) > div > div > span > span:nth-of-type(3) > select'))

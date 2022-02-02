@@ -76,7 +76,10 @@ class Email {
     if (this.accountName)
       return this.accountName
 
-    return uid(25)
+    return uniqueNamesGenerator({
+      dictionaries: [adjectives, colors, animals],
+      length: 3
+    })
   }
 
   randomizePassword () {

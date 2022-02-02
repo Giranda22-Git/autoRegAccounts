@@ -10,7 +10,7 @@ const captchaSolutionGate = async function (driver) {
   try {
     await waitElement(driver, By.className('styles-mobile__captchaImage--sHzh3'))
 
-    await driver.sleep(2000)
+    await driver.sleep(5000)
 
     const image = await driver.takeScreenshot()
 

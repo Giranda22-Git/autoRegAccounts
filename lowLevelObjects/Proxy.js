@@ -1,7 +1,7 @@
 const { uid } = require('uid')
-const mongoProxy = require('../models/proxy.js')
 const proxyChain = require('proxy-chain')
 const mongoGetUnUsedProxy = require('../simpleFunctions/mongoFunc/Proxy/mongoGetUnUsedProxy.js')
+const axios = require('axios').default
 
 // instagram
 const mongoUpdateInstagramUsedProxy = require('../simpleFunctions/mongoFunc/Instagram/mongoUpdateInstagramUsedProxy.js')
@@ -60,9 +60,11 @@ class proxy {
     this.instagram = instagram._id
   }
 
-  async init() {
+  async init(subject) {
     try {
-      const proxy = await mongoGetUnUsedProxy()
+      this.updateProxyIp()
+
+      const proxy = await mongoGetUnUsedProxy(subject)
 
       if (!proxy) {
         throw new Error('proxy servers is over')
@@ -75,6 +77,11 @@ class proxy {
     catch (err) {
       console.log('proxy init error: ', err)
     }
+  }
+
+  async updateProxyIp () {
+    await axios.get('http://185.70.109.21/x220xy7561c2t7d3o1mrd99r9bj2lj417.php')
+    await axios.get('https://onlinesim.ru/api/proxy/changeIp.php?apikey=6437947a11fe16d32f552e76e28a8137&tzid=12734')
   }
 
   async activate () {
@@ -96,8 +103,8 @@ class proxy {
   async endEmail (endProxy) {
     try {
       if (this.email && this.id) {
-        await mongoUpdateEmailUsedProxy(this.email, this.id)
-        await mongoUpdateProxyUsedInEmail(this.id, this.email)
+        // await mongoUpdateEmailUsedProxy(this.email, this.id)
+        // await mongoUpdateProxyUsedInEmail(this.id, this.email)
 
         if (endProxy) {
           await proxyChain.closeAnonymizedProxy(this.publicProxyUrl, true)
@@ -115,15 +122,15 @@ class proxy {
   async endInstagram (endProxy) {
     try {
       if (this.email && this.id && this.instagram) {
-        // instagram
-        await mongoUpdateInstagramUsedEmail(this.instagram, this.email)
-        await mongoUpdateInstagramUsedProxy(this.instagram, this.id)
+        // // instagram
+        // await mongoUpdateInstagramUsedEmail(this.instagram, this.email)
+        // await mongoUpdateInstagramUsedProxy(this.instagram, this.id)
 
-        // email
-        await mongoUpdateEmailUsedInInstagram(this.email, this.instagram)
+        // // email
+        // await mongoUpdateEmailUsedInInstagram(this.email, this.instagram)
 
-        // proxy
-        await mongoUpdateProxyUsedInInstagram(this.id, this.instagram)
+        // // proxy
+        // await mongoUpdateProxyUsedInInstagram(this.id, this.instagram)
 
         if (endProxy) {
           await proxyChain.closeAnonymizedProxy(this.publicProxyUrl, true)

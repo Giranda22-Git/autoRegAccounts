@@ -2,33 +2,35 @@ const createChromeDriver = require('../simpleFunctions/createChromeDriver.js')
 const openInstagramRegistrationPage = require('../simpleFunctions/openPageFunc/Instagram/openInstagramRegistrationPage.js')
 const setRegistrationDataForInstagram = require('../simpleFunctions/setDataOnPage/Instagram/setRegistrationDataForInstagram.js')
 const mongoSaveInstagram = require('../simpleFunctions/mongoFunc/Instagram/mongoSaveInstagram.js')
-//const captchaSolutionGate = require('../simpleFunctions/Email/captchaSolutionGate.js')
 const Instagram = require('../lowLevelObjects/Instagram.js')
 
-const createInstagram = async function (email, proxy) {
+const createInstagram = async function (email) {
   let instagram = new Instagram(email)
 
-  const chrome = await createChromeDriver(true, proxy)
+  const chrome = await createChromeDriver(true, 'instagram')
 
-  proxy = chrome.proxy
+  let proxy = chrome.proxy
   let driver = chrome.driver
 
   let tmpResults = { result: false, driver }
 
   tmpResults = await openInstagramRegistrationPage(driver)
 
-  if (tmpResults.result) {
-    driver = tmpResults.driver
-    tmpResults = await setRegistrationDataForInstagram(driver, instagram)
-  }
+  console.log(email)
 
-  instagram = await mongoSaveInstagram(instagram)
+  // if (tmpResults.result) {
+  //   driver = tmpResults.driver
+  //   tmpResults = await setRegistrationDataForInstagram(driver, instagram)
+  // }
 
-  proxy.addInstagram = instagram
+  // instagram = await mongoSaveInstagram(instagram)
 
-  await proxy.endInstagram(true)
+  // proxy.addInstagram = instagram
 
-  return {result: instagram, proxy}
+  // await proxy.endInstagram(true)
+
+  //return {result: instagram, proxy}
+  return true
 }
 
 module.exports = createInstagram

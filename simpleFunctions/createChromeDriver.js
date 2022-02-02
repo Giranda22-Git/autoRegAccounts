@@ -5,10 +5,10 @@ const chrome = require('selenium-webdriver/chrome')
 const Proxy = require('../lowLevelObjects/Proxy.js')
 const Stealth = require('../lowLevelObjects/Stealth.js')
 
-const createChromeDriver = async function (generateUserAgent, proxy) {
+const createChromeDriver = async function (generateUserAgent, subject, proxy) {
   try {
     if (!proxy) {
-      proxy = await (await new Proxy().init()).activate()
+      proxy = await (await new Proxy().init(subject)).activate()
     }
 
     const listOfChromeOptionArgs = [
@@ -18,8 +18,8 @@ const createChromeDriver = async function (generateUserAgent, proxy) {
       '--disable-plugins-discovery',
       '--profile-directory=Default',
       '--disable-extensions',
-      '--incognito',
-      //`--proxy-server=${proxy.publicProxyUrl}`,
+      //'--incognito',
+      `--proxy-server=${proxy.publicProxyUrl}`,
     ]
 
     if (generateUserAgent) {
@@ -62,9 +62,10 @@ const createChromeDriver = async function (generateUserAgent, proxy) {
 
     await seleniumStealth.stealth(stealthParams)
 
-    //await driver.get('http://whatismyip.host/')
-    await driver.get('https://bot.sannysoft.com/')
-    await driver.sleep(1000)
+    await driver.sleep(5000)
+    await driver.get('https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html')
+    //await driver.get('https://chattest.xyz/')
+    await driver.sleep(300000)
 
     return {driver, proxy}
   }

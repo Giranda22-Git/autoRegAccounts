@@ -50,7 +50,7 @@ class Stealth {
     "es-PR", "sx", "sv", "sv-FI", "th", "ts", "tn", "tr", "uk", "ur", "ve", "vi", "xh",
     "ji", "zu"]
 
-    return [getRandomElementFromArray (Languages)]
+    return [getRandomElementFromArray (["en-US"])]
   }
 
   generatePlatform () {

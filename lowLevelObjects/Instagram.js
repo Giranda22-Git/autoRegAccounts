@@ -1,4 +1,5 @@
 const { uid } = require('uid')
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator')
 
 module.exports =
 class Instagram {
@@ -7,7 +8,10 @@ class Instagram {
     this.firstName = email.firstName
     this.lastName = email.lastName
     this.dateOfBirth = email.dateOfBirth
-    this.accountName = uid(15)
+    this.accountName = uniqueNamesGenerator({
+      dictionaries: [adjectives, colors, animals, colors, adjectives, colors, animals, adjectives],
+      length: 8
+    })
     this.password = email.password
   }
 
